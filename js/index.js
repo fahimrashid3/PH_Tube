@@ -10,7 +10,7 @@ const categoryLoading = async () => {
     const categoryId = data.category_id;
     const categoryBtn = document.createElement("div");
     categoryBtn.innerHTML = `
-    <button class="btn btn-outline btn-error">${data.category}</button>
+    <button class="btn btn-outline btn-error" onclick="handelVideos(${data.category_id})" >${data.category}</button>
 
     `;
     const categoryBtnContainer = document.getElementById(
@@ -30,4 +30,19 @@ const createVideField = async (id) => {
   const videoList = await res.json();
   const video = videoList.data;
   console.log(video);
+};
+
+const handelVideos = async (id) => {
+  const res = await fetch(
+    `https://openapi.programming-hero.com/api/videos/category/${id}`
+  );
+  const videoList = await res.json();
+  const video = videoList.data;
+
+  video.forEach((id) => {
+    const videoField = document.getElementById("ideo_field");
+    const videoCard = document.createElement("div");
+    videoCard.innerHTML = `<P>video loading</p>`;
+    videoCard.appendChild(videoField);
+  });
 };
